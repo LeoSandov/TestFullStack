@@ -1,0 +1,14 @@
+{
+    "/productos": {
+      "target": "http://localhost:5166",
+      "secure": false,
+      "changeOrigin": true
+    },
+    "/api": {
+      "target": "http://localhost:5166",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/api": "/api" }
+    }
+  }
+  

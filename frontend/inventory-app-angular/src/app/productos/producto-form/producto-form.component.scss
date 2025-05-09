@@ -1,0 +1,38 @@
+.producto-form {
+    margin-top: 2rem;
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "nombre    imagen"
+      "descripcion precio"
+      "categoria  stock"
+      "actions    actions";
+    gap: 1rem 1.5rem;
+  
+    .field {
+      width: 100%;
+    }
+  
+    .nombre      { grid-area: nombre; }
+    .imagen      { grid-area: imagen; }
+    .descripcion { grid-area: descripcion; }
+    .precio      { grid-area: precio; }
+    .categoria   { grid-area: categoria; }
+    .stock       { grid-area: stock; }
+  
+    .actions {
+        grid-area: actions;
+        margin-top: 2rem;
+        /* si el form está centrado, esto estira al ancho del form */
+      }
+      
+      .actions button {
+        width: 100vw;           /* ancho total de la ventana */
+        max-width: none;        /* anula cualquier límite */
+        margin-left: calc(-50vw + 50%); /* centra ese “100vw” */
+      }
+      
+  }
+  

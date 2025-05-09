@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="producto-form">
+
+  <!-- Fila 1 -->
+  <mat-form-field appearance="outline" class="field nombre">
+    <mat-label>Nombre*</mat-label>
+    <input matInput formControlName="ndProductoNombre" />
+    <mat-error *ngIf="form.get('ndProductoNombre')?.hasError('required')">
+      El nombre es obligatorio
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="field imagen">
+    <mat-label>Imagen URL</mat-label>
+    <input matInput formControlName="ndProductoImagenUrl" />
+  </mat-form-field>
+
+  <!-- Fila 2 -->
+  <mat-form-field appearance="outline" class="field descripcion">
+    <mat-label>Descripción</mat-label>
+    <input matInput formControlName="ndProductoDescripcion" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="field precio">
+    <mat-label>Precio Unitario*</mat-label>
+    <input matInput type="number" formControlName="ndProductoPrecioUnitario" />
+    <mat-error *ngIf="form.get('ndProductoPrecioUnitario')?.hasError('min')">
+      Debe ser ≥ 0
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Fila 3 -->
+  <mat-form-field appearance="outline" class="field categoria">
+    <mat-label>Categoría</mat-label>
+    <input matInput formControlName="ndProductoCategoria" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="field stock">
+    <mat-label>Stock*</mat-label>
+    <input matInput type="number" formControlName="ndProductoStock" />
+    <mat-error *ngIf="form.get('ndProductoStock')?.hasError('min')">
+      Debe ser ≥ 0
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Fila 4: botón en ambas columnas -->
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      Guardar
+    </button>
+  </div>
+</form>

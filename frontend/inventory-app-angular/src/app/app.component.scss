@@ -1,0 +1,21 @@
+/* barra superior fondo negro y texto blanco */
+.app-toolbar-dark {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* los links mat-button dentro de esa toolbar también deben ir blancos */
+.app-toolbar-dark a[mat-button] {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* para resaltar la ruta activa, por ejemplo cambiando el fondo o subrayado */
+.app-toolbar-dark a.active-link {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* utilidad para empujar hacia la derecha */
+.spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,96 @@
+<div class="toolbar">
+  <button mat-raised-button color="primary" routerLink="/transacciones/nueva">
+    Nueva Transacción
+  </button>
+</div>
+
+<form [formGroup]="filtroForm" (ngSubmit)="cargar()" class="filter-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Producto ID</mat-label>
+    <input matInput type="number" formControlName="productoId" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tipo</mat-label>
+    <mat-select formControlName="tipo">
+      <mat-option value="">Todos</mat-option>
+      <mat-option value="compra">Compra</mat-option>
+      <mat-option value="venta">Venta</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Desde</mat-label>
+    <input matInput [matDatepicker]="d1" formControlName="fechaDesde" />
+    <mat-datepicker-toggle matSuffix [for]="d1"></mat-datepicker-toggle>
+    <mat-datepicker #d1></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Hasta</mat-label>
+    <input matInput [matDatepicker]="d2" formControlName="fechaHasta" />
+    <mat-datepicker-toggle matSuffix [for]="d2"></mat-datepicker-toggle>
+    <mat-datepicker #d2></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Filtrar</button>
+  <button mat-button type="button" (click)="limpiar()">Limpiar</button>
+</form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- ID -->
+  <ng-container matColumnDef="ndTransaccionId">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let row"> {{ row.ndTransaccionId }} </td>
+  </ng-container>
+
+  <!-- Fecha -->
+  <ng-container matColumnDef="ndTransaccionFecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.ndTransaccionFecha | date:'short' }}
+    </td>
+  </ng-container>
+
+  <!-- Tipo -->
+  <ng-container matColumnDef="ndTransaccionTipo">
+    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+    <td mat-cell *matCellDef="let row"> {{ row.ndTransaccionTipo }} </td>
+  </ng-container>
+
+  <!-- Producto -->
+  <ng-container matColumnDef="ndTransaccionProductoId">
+    <th mat-header-cell *matHeaderCellDef> Producto </th>
+    <td mat-cell *matCellDef="let row"> {{ row.ndTransaccionProductoId }} </td>
+  </ng-container>
+
+  <!-- Cantidad -->
+  <ng-container matColumnDef="ndTransaccionCantidad">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let row"> {{ row.ndTransaccionCantidad }} </td>
+  </ng-container>
+
+  <!-- Precio Unitario -->
+  <ng-container matColumnDef="ndTransaccionPrecioUnitario">
+    <th mat-header-cell *matHeaderCellDef> P. Unitario </th>
+    <td mat-cell *matCellDef="let row">
+      {{ row.ndTransaccionPrecioUnitario | currency }}
+    </td>
+  </ng-container>
+
+  <!-- Total -->
+  <ng-container matColumnDef="ndTransaccionTotal">
+    <th mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let row"> {{ row.ndTransaccionTotal | currency }} </td>
+  </ng-container>
+
+  <!-- Detalle -->
+  <ng-container matColumnDef="ndTransaccionDetalle">
+    <th mat-header-cell *matHeaderCellDef> Detalle </th>
+    <td mat-cell *matCellDef="let row"> {{ row.ndTransaccionDetalle }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row        *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

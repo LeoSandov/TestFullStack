@@ -1,0 +1,68 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <mat-select formControlName="ndTransaccionTipo">
+        <mat-option value="compra">Compra</mat-option>
+        <mat-option value="venta">Venta</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Producto</mat-label>
+      <mat-select formControlName="ndTransaccionProductoId">
+        <mat-option
+          *ngFor="let p of productos"
+          [value]="p.ndProductoId"
+        >
+          {{ p.ndProductoNombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Cantidad</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="ndTransaccionCantidad"
+      />
+      <mat-error
+        *ngIf="
+          form.controls['ndTransaccionCantidad'].hasError('min')
+        "
+      >
+        Debe ser ≥ 1
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Precio Unitario</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="ndTransaccionPrecioUnitario"
+      />
+      <mat-error
+        *ngIf="
+          form.controls['ndTransaccionPrecioUnitario'].hasError('min')
+        "
+      >
+        Debe ser ≥ 0
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Detalle</mat-label>
+      <input matInput formControlName="ndTransaccionDetalle" />
+    </mat-form-field>
+  
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Registrar
+    </button>
+  </form>
+  

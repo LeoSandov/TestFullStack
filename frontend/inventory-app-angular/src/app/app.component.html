@@ -1,0 +1,8 @@
+<mat-toolbar class="app-toolbar-dark">
+  <span class="app-title">Test Inventario</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+  <a mat-button routerLink="/productos" routerLinkActive="active-link">Productos</a>
+  <a mat-button routerLink="/transacciones" routerLinkActive="active-link">Transacciones</a>
+</mat-toolbar>
+<router-outlet class="main-container"></router-outlet>
