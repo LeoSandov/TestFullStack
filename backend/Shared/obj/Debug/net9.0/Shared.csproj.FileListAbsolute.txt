@@ -9,3 +9,4 @@ C:\Users\leito\Documents\TESTFULLSTACK\backend\Shared\obj\Debug\net9.0\Shared.dl
 C:\Users\leito\Documents\TESTFULLSTACK\backend\Shared\obj\Debug\net9.0\refint\Shared.dll
 C:\Users\leito\Documents\TESTFULLSTACK\backend\Shared\obj\Debug\net9.0\Shared.pdb
 C:\Users\leito\Documents\TESTFULLSTACK\backend\Shared\obj\Debug\net9.0\ref\Shared.dll
+C:\Users\leito\Documents\TESTFULLSTACK\backend\Shared\obj\Debug\net9.0\Shared.sourcelink.json

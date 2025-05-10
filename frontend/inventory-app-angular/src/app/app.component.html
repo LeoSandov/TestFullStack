@@ -1,8 +1,11 @@
-<mat-toolbar class="app-toolbar-dark">
-  <span class="app-title">Test Inventario</span>
+<mat-toolbar class="toolbar-dark">
+  <span>Test Inventario</span>
   <span class="spacer"></span>
-  <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-  <a mat-button routerLink="/productos" routerLinkActive="active-link">Productos</a>
-  <a mat-button routerLink="/transacciones" routerLinkActive="active-link">Transacciones</a>
+
+  <!-- Ojo aquí: Home debe estar -->
+  <a mat-button routerLink="/" class="toolbar-button">Home</a>
+  <a mat-button routerLink="/productos" class="toolbar-button">Productos</a>
+  <a mat-button routerLink="/transacciones" class="toolbar-button">Transacciones</a>
 </mat-toolbar>
-<router-outlet class="main-container"></router-outlet>
+
+<router-outlet></router-outlet>

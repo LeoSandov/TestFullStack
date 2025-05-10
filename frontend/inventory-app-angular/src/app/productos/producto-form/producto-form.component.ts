@@ -10,6 +10,9 @@ import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto.model';
 import { Observable } from 'rxjs';
 
+import { NO_SPECIAL_CHARS } from '../../utils/validators';
+
+
 @Component({
   selector: 'app-producto-form',
   standalone: true,
@@ -38,9 +41,9 @@ export class ProductoFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      ndProductoNombre: ['', Validators.required],
-      ndProductoDescripcion: [''],
-      ndProductoCategoria: [''],
+      ndProductoNombre: ['', [Validators.required, Validators.pattern(NO_SPECIAL_CHARS)]],
+      ndProductoDescripcion: ['', Validators.pattern(NO_SPECIAL_CHARS)],
+      ndProductoCategoria: ['', Validators.pattern(NO_SPECIAL_CHARS)],
       ndProductoImagenUrl: [''],
       ndProductoPrecioUnitario: [0, [Validators.required, Validators.min(0)]],
       ndProductoStock: [0, [Validators.required, Validators.min(0)]],

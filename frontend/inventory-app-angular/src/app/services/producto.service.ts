@@ -58,4 +58,10 @@ export class ProductoService {
   eliminar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+   ajustarStock(id: number, delta: number): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/${id}/stock`, null, {
+      params: { delta: delta.toString() }
+    });
+  }
 }

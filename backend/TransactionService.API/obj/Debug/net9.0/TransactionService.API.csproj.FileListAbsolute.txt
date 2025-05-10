@@ -169,3 +169,4 @@ C:\Users\leito\Documents\TESTFULLSTACK\backend\TransactionService.API\bin\Debug\
 C:\Users\leito\Documents\TESTFULLSTACK\backend\TransactionService.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\leito\Documents\TESTFULLSTACK\backend\TransactionService.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\leito\Documents\TESTFULLSTACK\backend\TransactionService.API\bin\Debug\net9.0\EFCore.NamingConventions.dll
+C:\Users\leito\Documents\TESTFULLSTACK\backend\TransactionService.API\obj\Debug\net9.0\TransactionService.API.sourcelink.json

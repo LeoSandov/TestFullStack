@@ -10,7 +10,7 @@ namespace Inventario.TransactionService.API.Data
         { }
 
         public DbSet<NdTransaccion> NdTransacciones { get; set; } = null!;
-
+        public DbSet<NdProducto> NdProductos { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<NdTransaccion>()
@@ -22,6 +22,8 @@ namespace Inventario.TransactionService.API.Data
                 .WithMany(p => p.ndTransacciones)
                 .HasForeignKey(t => t.NdTransaccionProductoId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

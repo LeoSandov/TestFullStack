@@ -87,5 +87,17 @@ namespace Inventario.ProductService.API.Controllers
             await _db.SaveChangesAsync();
             return NoContent();
         }
+
+        [HttpPut("{id}/stock")]
+        public async Task<IActionResult> AjustarStock(int id, [FromQuery] int delta)
+        {
+            var producto = await _db.NdProductos.FindAsync(id);
+            if (producto == null)
+                return NotFound();
+
+            producto.ndProductoStock += delta;
+            await _db.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

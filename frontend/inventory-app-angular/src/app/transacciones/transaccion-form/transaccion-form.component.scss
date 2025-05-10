@@ -1,21 +1,38 @@
+/* transaccion-form.component.scss */
 :host {
-    display: block;
-    margin-top: 16px;
+  display: block;
+  margin-top: 2rem;
+}
+
+.transaccion-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "tipo         producto     cantidad     precioUnidad"
+    "detalle      detalle      detalle      detalle"
+    "actions      actions      actions      actions";
+  gap: 1rem 1.5rem;
+}
+
+.field {
+  width: 100%;
+}
+
+// Mapeo de áreas
+.tipo         { grid-area: tipo; }
+.producto     { grid-area: producto; }
+.cantidad     { grid-area: cantidad; }
+.precioUnidad { grid-area: precioUnidad; }
+.detalle      { grid-area: detalle; }
+
+.actions {
+  grid-area: actions;
+  margin-top: 1rem;
+  /* Hacemos que el botón ocupe todo el ancho del form */
+  button {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(-50vw + 50%);
   }
-  
-  .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  
-  mat-form-field {
-    flex: 1 1 180px;
-  }
-  
-  button[type="submit"] {
-    margin-top: 24px;
-    align-self: flex-end;
-  }
-  
+}

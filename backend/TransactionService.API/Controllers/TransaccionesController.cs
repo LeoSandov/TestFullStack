@@ -51,12 +51,62 @@ namespace Inventario.TransactionService.API.Controllers
         [HttpPost]
         public async Task<ActionResult<NdTransaccion>> Create(NdTransaccion nueva)
         {
-            nueva.NdTransaccionFecha      = DateTime.UtcNow;
-            nueva.NdTransaccionCreadoEn   = DateTime.UtcNow;
-            // total es columna calculada en la BD; EF la cargará al leer
+            // 1) Inicializar fechas
+            nueva.NdTransaccionFecha = DateTime.UtcNow;
+            nueva.NdTransaccionCreadoEn = DateTime.UtcNow;
+
+            // 2) Comenzar transacción de BD
+            await using var dbTrans = await _db.Database.BeginTransactionAsync();
+
+            // 3) Insertar la transacción
             _db.NdTransacciones.Add(nueva);
             await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = nueva.NdTransaccionId }, nueva);
+
+            // 4) Ajustar stock del producto
+            var producto = await _db.NdProductos
+                                   .FirstOrDefaultAsync(p => p.ndProductoId == nueva.NdTransaccionProductoId);
+            if (producto != null)
+            {
+                if (string.Equals(nueva.NdTransaccionTipo, "compra", StringComparison.OrdinalIgnoreCase))
+                    producto.ndProductoStock += nueva.NdTransaccionCantidad;
+                else if (string.Equals(nueva.NdTransaccionTipo, "venta", StringComparison.OrdinalIgnoreCase))
+                    producto.ndProductoStock -= nueva.NdTransaccionCantidad;
+
+                _db.NdProductos.Update(producto);
+                await _db.SaveChangesAsync();
+            }
+
+            // 5) Commit
+            await dbTrans.CommitAsync();
+
+            // 6) Devolver Created
+            return CreatedAtAction(nameof(GetById),
+                                   new { id = nueva.NdTransaccionId },
+                                   nueva);
+        }
+
+        // PUT: api/transacciones/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, NdTransaccion updated)
+        {
+            if (id != updated.NdTransaccionId)
+                return BadRequest("El ID de la URL debe coincidir con el ID del cuerpo.");
+
+            var existing = await _db.NdTransacciones.FindAsync(id);
+            if (existing == null)
+                return NotFound();
+
+            // Actualiza sólo los campos que quieres permitir modificar
+            existing.NdTransaccionTipo = updated.NdTransaccionTipo;
+            existing.NdTransaccionProductoId = updated.NdTransaccionProductoId;
+            existing.NdTransaccionCantidad = updated.NdTransaccionCantidad;
+            existing.NdTransaccionPrecioUnitario = updated.NdTransaccionPrecioUnitario;
+            existing.NdTransaccionDetalle = updated.NdTransaccionDetalle;
+            // No tocamos Fecha ni CreadoEn a menos que quieras resetearlos
+
+            _db.NdTransacciones.Update(existing);
+            await _db.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

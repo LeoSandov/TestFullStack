@@ -8,3 +8,9 @@ html, body {
   .mat-typography {
     font-family: 'Montserrat', sans-serif;
   }
+
+  /* forzar toolbar negra */
+.mat-toolbar {
+  background-color: #000 !important;
+  color: #fff !important;
+}

@@ -1,56 +1,71 @@
-<div class="list-container">
+<div class="toolbar">
   <button mat-raised-button color="primary" routerLink="/productos/nuevo">
     Nuevo Producto
   </button>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- ID -->
-    <ng-container matColumnDef="ndProductoId">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let p">{{ p.ndProductoId }}</td>
-    </ng-container>
+  <form [formGroup]="filtroForm" class="filter-inline">
+    <mat-form-field appearance="outline">
+      <mat-label>Categoría</mat-label>
+      <mat-select formControlName="categoria">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let cat of categorias" [value]="cat">
+          {{ cat }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <!-- Imagen -->
-    <ng-container matColumnDef="imagen">
-      <th mat-header-cell *matHeaderCellDef>Imagen</th>
-      <td mat-cell *matCellDef="let p">
-        <img [src]="'http://localhost:5166' + p.ndProductoImagenUrl" alt="{{ p.ndProductoNombre }}"
-          style="height:60px; object-fit:contain" />
-      </td>
-    </ng-container>
-
-    <!-- Nombre -->
-    <ng-container matColumnDef="ndProductoNombre">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let p">{{ p.ndProductoNombre }}</td>
-    </ng-container>
-
-    <!-- Precio -->
-    <ng-container matColumnDef="ndProductoPrecioUnitario">
-      <th mat-header-cell *matHeaderCellDef>Precio</th>
-      <td mat-cell *matCellDef="let p">{{ p.ndProductoPrecioUnitario | currency }}</td>
-    </ng-container>
-
-    <!-- Stock -->
-    <ng-container matColumnDef="ndProductoStock">
-      <th mat-header-cell *matHeaderCellDef>Stock</th>
-      <td mat-cell *matCellDef="let p">{{ p.ndProductoStock }}</td>
-    </ng-container>
-
-    <!-- Acciones -->
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef>Acciones</th>
-      <td mat-cell *matCellDef="let p">
-        <button mat-icon-button color="accent" [routerLink]="['/productos/editar', p.ndProductoId]">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="eliminar(p.ndProductoId)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+    <button mat-button type="button" (click)="clearFilter()">
+      Limpiar
+    </button>
+  </form>
 </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- columnas existentes… -->
+  <!-- ID -->
+  <ng-container matColumnDef="ndProductoId">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let p">{{ p.ndProductoId }}</td>
+  </ng-container>
+  <!-- Imagen -->
+  <ng-container matColumnDef="imagen">
+    <th mat-header-cell *matHeaderCellDef>Imagen</th>
+    <td mat-cell *matCellDef="let p">
+      <img [src]="'http://localhost:5166' + p.ndProductoImagenUrl" alt="{{ p.ndProductoNombre }}"
+        style="height:60px; object-fit:contain" />
+    </td>
+  </ng-container>
+  <!-- Nombre -->
+  <ng-container matColumnDef="ndProductoNombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let p">{{ p.ndProductoNombre }}</td>
+  </ng-container>
+  <!-- Precio -->
+  <ng-container matColumnDef="ndProductoPrecioUnitario">
+    <th mat-header-cell *matHeaderCellDef>Precio</th>
+    <td mat-cell *matCellDef="let p">{{ p.ndProductoPrecioUnitario | currency }}</td>
+  </ng-container>
+  <!-- Stock -->
+  <ng-container matColumnDef="ndProductoStock">
+    <th mat-header-cell *matHeaderCellDef>Stock</th>
+    <td mat-cell *matCellDef="let p">{{ p.ndProductoStock }}</td>
+  </ng-container>
+  <!-- Acciones -->
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let p">
+      <button mat-icon-button color="accent" [routerLink]="['/productos/editar', p.ndProductoId]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="eliminar(p.ndProductoId)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons aria-label="Selección de página">
+</mat-paginator>

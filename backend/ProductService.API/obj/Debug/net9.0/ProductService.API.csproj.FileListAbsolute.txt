@@ -169,3 +169,4 @@ C:\Users\leito\Documents\TESTFULLSTACK\backend\ProductService.API\bin\Debug\net9
 C:\Users\leito\Documents\TESTFULLSTACK\backend\ProductService.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\leito\Documents\TESTFULLSTACK\backend\ProductService.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\leito\Documents\TESTFULLSTACK\backend\ProductService.API\bin\Debug\net9.0\EFCore.NamingConventions.dll
+C:\Users\leito\Documents\TESTFULLSTACK\backend\ProductService.API\obj\Debug\net9.0\ProductService.API.sourcelink.json
