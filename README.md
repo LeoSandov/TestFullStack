@@ -46,4 +46,5 @@ Cada servicio dispone de su propio puerto (5166 Productos, 5062 Transacciones):
 2. Esto levantará el cliente en `http://localhost:4200`.
 
 > **Asegurarse** de que los microservicios estén corriendo y permitir CORS en `http://localhost:4200`.
+![image](https://github.com/user-attachments/assets/b39a92a7-1a2f-443d-b261-c2cbe75c1a18)
 
