@@ -26,7 +26,8 @@ import { Producto }        from '../../models/producto.model';
     MatSelectModule,
 
     MatTableModule,
-    MatPaginatorModule,    // ← necesario
+    MatPaginatorModule,
+    
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule
@@ -67,7 +68,7 @@ export class ProductoListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Conecta el paginator al dataSource
+    
     this.dataSource.paginator = this.paginator;
   }
 

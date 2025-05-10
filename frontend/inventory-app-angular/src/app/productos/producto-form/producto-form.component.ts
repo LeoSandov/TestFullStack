@@ -63,7 +63,7 @@ export class ProductoFormComponent implements OnInit {
     const now = new Date().toISOString();
 
     const body: Partial<Producto> = {
-      ndProductoId: id,               // ← lo añadimos
+      ndProductoId: id, 
       ndProductoNombre: raw.ndProductoNombre!,
       ndProductoDescripcion: raw.ndProductoDescripcion ?? '',
       ndProductoCategoria: raw.ndProductoCategoria ?? '',
@@ -76,13 +76,12 @@ export class ProductoFormComponent implements OnInit {
 
 
     if (id) {
-      // ** MUY IMPORTANTE: ponemos el id para que el PUT pase la validación **
       body.ndProductoId = id;
     }
 
     const obs: Observable<Producto | void> = id
-      ? this.svc.actualizar(id, body)   // PUT /api/productos/1
-      : this.svc.crear(body);           // POST /api/productos
+      ? this.svc.actualizar(id, body)  
+      : this.svc.crear(body); 
 
     obs.subscribe({
       next: () => {

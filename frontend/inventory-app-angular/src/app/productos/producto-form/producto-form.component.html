@@ -1,6 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="producto-form">
 
-  <!-- Fila 1 -->
   <mat-form-field appearance="outline" class="field nombre">
     <mat-label>Nombre*</mat-label>
     <input matInput formControlName="ndProductoNombre" />
@@ -13,7 +12,7 @@
     <input matInput formControlName="ndProductoImagenUrl" />
   </mat-form-field>
 
-  <!-- Fila 2 -->
+  
   <mat-form-field appearance="outline" class="field descripcion">
     <mat-label>Descripción</mat-label>
     <input matInput formControlName="ndProductoDescripcion" />
@@ -26,7 +25,7 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Fila 3 -->
+  
   <mat-form-field appearance="outline" class="field categoria">
     <mat-label>Categoría</mat-label>
     <input matInput formControlName="ndProductoCategoria" />
@@ -39,7 +38,7 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Fila 4: botón en ambas columnas -->
+  
   <div class="actions">
     <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
       Guardar

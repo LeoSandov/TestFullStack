@@ -13,7 +13,6 @@ namespace Inventario.TransactionService.API.Controllers
         public TransaccionesController(InventoryContext db) => _db = db;
 
         // GET: api/transacciones
-        // Puedes filtrar por productoId, tipo, fechaDesde y fechaHasta
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NdTransaccion>>> GetAll(
             [FromQuery] int? productoId,
@@ -51,18 +50,18 @@ namespace Inventario.TransactionService.API.Controllers
         [HttpPost]
         public async Task<ActionResult<NdTransaccion>> Create(NdTransaccion nueva)
         {
-            // 1) Inicializar fechas
+
             nueva.NdTransaccionFecha = DateTime.UtcNow;
             nueva.NdTransaccionCreadoEn = DateTime.UtcNow;
 
-            // 2) Comenzar transacción de BD
+
             await using var dbTrans = await _db.Database.BeginTransactionAsync();
 
-            // 3) Insertar la transacción
+
             _db.NdTransacciones.Add(nueva);
             await _db.SaveChangesAsync();
 
-            // 4) Ajustar stock del producto
+
             var producto = await _db.NdProductos
                                    .FirstOrDefaultAsync(p => p.ndProductoId == nueva.NdTransaccionProductoId);
             if (producto != null)
@@ -76,10 +75,10 @@ namespace Inventario.TransactionService.API.Controllers
                 await _db.SaveChangesAsync();
             }
 
-            // 5) Commit
+
             await dbTrans.CommitAsync();
 
-            // 6) Devolver Created
+
             return CreatedAtAction(nameof(GetById),
                                    new { id = nueva.NdTransaccionId },
                                    nueva);
@@ -96,13 +95,13 @@ namespace Inventario.TransactionService.API.Controllers
             if (existing == null)
                 return NotFound();
 
-            // Actualiza sólo los campos que quieres permitir modificar
+
             existing.NdTransaccionTipo = updated.NdTransaccionTipo;
             existing.NdTransaccionProductoId = updated.NdTransaccionProductoId;
             existing.NdTransaccionCantidad = updated.NdTransaccionCantidad;
             existing.NdTransaccionPrecioUnitario = updated.NdTransaccionPrecioUnitario;
             existing.NdTransaccionDetalle = updated.NdTransaccionDetalle;
-            // No tocamos Fecha ni CreadoEn a menos que quieras resetearlos
+            
 
             _db.NdTransacciones.Update(existing);
             await _db.SaveChangesAsync();

@@ -8,7 +8,7 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1) CORS
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirLocalhost4200", policy =>
@@ -20,21 +20,21 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 2) Swagger/OpenAPI
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "TransactionService API", Version = "v1" });
 });
 
-// 3) DbContext + snake_case
+
 var connString = builder.Configuration.GetConnectionString("InventarioDb");
 builder.Services.AddDbContext<InventoryContext>(opt =>
     opt.UseSqlServer(connString)
        .UseSnakeCaseNamingConvention()
 );
 
-// 4) Controladores + JSON camelCase
+
 builder.Services.AddControllers()
     .AddJsonOptions(opts =>
         opts.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -42,7 +42,7 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
-// 5) Middleware
+
 app.UseCors("PermitirLocalhost4200");
 
 if (app.Environment.IsDevelopment())

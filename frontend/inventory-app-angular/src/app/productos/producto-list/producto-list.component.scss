@@ -1,5 +1,3 @@
-/* producto-list.component.scss */
-
 .toolbar {
   display: flex;
   align-items: center;
@@ -9,8 +7,8 @@
 }
 
 .filter-inline {
-  margin-left: auto;     /* lo mantiene a la derecha */
-  margin-top: 1rem;      /* separa del toolbar */
+  margin-left: auto;    
+  margin-top: 1rem; 
   display: flex;
   align-items: center;
   gap: 0.5rem;

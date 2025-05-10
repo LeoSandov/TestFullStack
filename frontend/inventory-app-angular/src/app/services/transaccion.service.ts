@@ -24,7 +24,7 @@ export class TransaccionService {
       params = params.set('tipo', tipo);
     }
     if (fechaDesde) {
-      // Convertimos la Date a ISO string
+      
       params = params.set('fechaDesde', fechaDesde.toISOString());
     }
     if (fechaHasta) {

@@ -61,7 +61,7 @@ export class TransaccionFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // 1) Inicializar formulario
+    
     this.form = this.fb.group({
       ndTransaccionTipo: ['compra', [Validators.required,]],
       ndTransaccionProductoId: [null, [Validators.required]],
@@ -70,14 +70,14 @@ export class TransaccionFormComponent implements OnInit {
       ndTransaccionDetalle: ['', [Validators.pattern(NO_SPECIAL_CHARS)]]
     });
 
-    // 2) Cargar productos
+    
     this.prodSvc.listar().subscribe(prods => {
       this.productos = prods;
-      // tras cargar productos suscribimos a sus cambios
+      
       this.watchProductoYTipo();
     });
 
-    // 3) Si estamos editando, cargar la transacción existente
+    
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
       this.editar = true;
@@ -90,19 +90,17 @@ export class TransaccionFormComponent implements OnInit {
           ndTransaccionPrecioUnitario: tx.ndTransaccionPrecioUnitario,
           ndTransaccionDetalle: tx.ndTransaccionDetalle
         });
-        // inicializar stock y validadores tras patch
+        
         this.updateStock(tx.ndTransaccionProductoId);
         this.updateValidators();
       });
     } else {
-      // en creación, igual inicializamos validadores de entrada
+      
       this.watchProductoYTipo();
     }
   }
 
-  /** 
-   * Observa cambios en producto y tipo para recalcular stock y validadores 
-   */
+  
   private watchProductoYTipo() {
     this.form.get('ndTransaccionProductoId')!
       .valueChanges
@@ -113,14 +111,14 @@ export class TransaccionFormComponent implements OnInit {
       .subscribe(() => this.updateValidators());
   }
 
-  /** Establece stockDisponible según productoId y actualiza validadores */
+  
   private updateStock(prodId: number) {
     const prod = this.productos.find(p => p.ndProductoId === prodId);
     this.stockDisponible = prod ? prod.ndProductoStock : 0;
     this.updateValidators();
   }
 
-  /** Ajusta el validador max sólo para ventas */
+  
   private updateValidators() {
     const cantidadCtl = this.form.get('ndTransaccionCantidad')!;
     const validators = [Validators.required, Validators.min(1)];
@@ -137,13 +135,13 @@ export class TransaccionFormComponent implements OnInit {
     if (this.form.invalid) return;
     const data = this.form.value as Transaccion;
 
-    // determinamos el delta a aplicar
+    
     const delta = data.ndTransaccionTipo === 'compra'
       ? data.ndTransaccionCantidad
       : -data.ndTransaccionCantidad;
 
     if (this.editar) {
-      // <-- inyectamos el id en el body antes de llamar al PUT
+      
       data.ndTransaccionId = this.idTransaccion;
 
       this.svc.actualizar(this.idTransaccion, data).subscribe({
@@ -172,7 +170,7 @@ export class TransaccionFormComponent implements OnInit {
         )
       });
     } else {
-      // crear: creamos la transacción y luego el stock
+      
       this.svc.crear(data).subscribe({
         next: () => {
           this.prodSvc.ajustarStock(data.ndTransaccionProductoId, delta)

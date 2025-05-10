@@ -63,7 +63,6 @@ namespace Inventario.ProductService.API.Controllers
                 return NotFound();
             if (existing == null) return NotFound();
 
-            // Actualizar solo los campos editables
             existing.ndProductoNombre = producto.ndProductoNombre;
             existing.ndProductoDescripcion = producto.ndProductoDescripcion;
             existing.ndProductoCategoria = producto.ndProductoCategoria;

@@ -25,13 +25,12 @@
     .actions {
         grid-area: actions;
         margin-top: 2rem;
-        /* si el form está centrado, esto estira al ancho del form */
       }
       
       .actions button {
-        width: 100vw;           /* ancho total de la ventana */
-        max-width: none;        /* anula cualquier límite */
-        margin-left: calc(-50vw + 50%); /* centra ese “100vw” */
+        width: 100vw;       
+        max-width: none;  
+        margin-left: calc(-50vw + 50%); 
       }
       
   }

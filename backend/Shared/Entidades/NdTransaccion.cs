@@ -35,8 +35,6 @@ namespace Inventario.Shared.Entities
 
         [Column("ndtransaccion_creado_en")]
         public DateTime NdTransaccionCreadoEn { get; set; }
-
-        // Relación
         public NdProducto? NdProducto { get; set; }
     }
 }

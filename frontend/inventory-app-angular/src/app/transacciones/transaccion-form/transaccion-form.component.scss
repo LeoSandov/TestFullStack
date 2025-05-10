@@ -1,4 +1,3 @@
-/* transaccion-form.component.scss */
 :host {
   display: block;
   margin-top: 2rem;
@@ -19,7 +18,7 @@
   width: 100%;
 }
 
-// Mapeo de áreas
+
 .tipo         { grid-area: tipo; }
 .producto     { grid-area: producto; }
 .cantidad     { grid-area: cantidad; }
@@ -29,7 +28,7 @@
 .actions {
   grid-area: actions;
   margin-top: 1rem;
-  /* Hacemos que el botón ocupe todo el ancho del form */
+  
   button {
     width: 100vw;
     max-width: none;

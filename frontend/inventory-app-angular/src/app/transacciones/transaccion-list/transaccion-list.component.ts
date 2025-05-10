@@ -37,7 +37,8 @@ import { Transaccion }        from '../../models/transaccion.model';
     MatSnackBarModule,
 
     MatTableModule,
-    MatPaginatorModule,  // ← para la paginación
+    MatPaginatorModule,  
+    
     MatIconModule,
     MatTooltipModule
   ]
